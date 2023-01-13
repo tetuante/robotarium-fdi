@@ -1,0 +1,5 @@
+site_name: Robotarium-FDI
+markdown_extensions:
+    - admonition
+nav:
+  - IX Semana Informática: index.md
