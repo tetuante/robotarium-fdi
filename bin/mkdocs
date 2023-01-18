@@ -1,0 +1,8 @@
+#!/home/lia/Documents/03-Investigacion/07_Robotarium/robotarium-fdi/docs/bin/python
+# -*- coding: utf-8 -*-
+import re
+import sys
+from mkdocs.__main__ import cli
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(cli())

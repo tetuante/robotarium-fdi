@@ -58,7 +58,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#montaje-del-robot" class="nav-link">Montaje del Robot</a>
+            <li class="nav-item" data-level="2"><a href="#fase-1-construccion-del-robot" class="nav-link">Fase 1: Construcción del Robot</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -89,8 +89,207 @@
 <li><code>Hacer un círculo</code> - Programaréis el robot para que recorra un círculo de 1m de radio. </li>
 <li><code>Hacer un cuadrado</code> - Programaréis el robot para que recorra un cuadrado. ¡Cuidado con las esquinas!</li>
 </ul>
-<h2 id="montaje-del-robot">Montaje del Robot</h2>
-<h3 id="montar-la-chapa-roja">Montar la chapa roja</h3>
+<h2 id="fase-1-construccion-del-robot">Fase 1: Construcción del Robot</h2>
+<p>En esta primera etapa el objetivo es que montéis el chasis del robot y realicéis todas las conexiones necesarias para que el robot pueda mover las ruedas.
+Para ello tendréis que seguir los siguientes pasos:</p>
+<ol>
+<li><em>Montar el chasis</em> con los motores, ruedas y rueda loca.</li>
+<li><em>Montar el sensor de odometría</em> para poder medir la distancia que recorre el robot.</li>
+<li><em>Conectar la alimentación</em></li>
+<li><em>Conectar los motores</em> con la placa de control y el Arduino</li>
+</ol>
+<p>Vamos paso a paso.</p>
+<h3 id="montar-la-el-chasis-rojo">Montar la el chasis rojo</h3>
+<p>En la caja de cartón tienes las piezas y tornillería necesarias para montar el chasis del robot. Sigue las instrucciones en papel que vienen en la caja.
+El único paso que no figura en las instrucciones es la manera de colocar la rueda con agujeros que nos va a permitir detectar el movimiento de las ruedas usando el sensor de infrarrojos.
+<img alt="Colocación de las ruedas para el odómetro" src="img/Robotarium_RuedasOdometros.jpg" /></p>
+<p>Al final de este paso vuestro robot se tiene que parecer a este
+<img alt="Chasis del robot" src="img/Robotarium_Chasis1.png" />
+<img alt="Chasis del robot" src="img/Robotarium_Chasis2.png" /></p>
+<h3 id="montar-el-sensor-de-infrarrojos-para-la-odometria">Montar el sensor de infrarrojos para la odometría</h3>
+<p>Ahora toca montar los sensores de infrarrojos que van a detectar los agujeros de la rueda de plástico y de esta manera se podrán ir contando las vueltas que va dando cada una de las ruedas y así estimar la distancia que recorre cada rueda del robot.</p>
+<p>Fijad los sensores con cinta de doble cara como se indica en las imágenes.</p>
+<p><img alt="Sensores de infrarrojos para el odómetro" src="img/Robotarium_Sensoresdometros.jpg" />
+<img alt="Detalle de la colocación de los sensores" src="img/Robotarium_ColocacionIR_detalle.jpg" /></p>
+<h3 id="conectar-la-alimentacion">Conectar la alimentación</h3>
+<p>Para alimentar toda la electrónica necesitamos un regulador de tensión. A la entrada de este regulador se conecta la batería y a la salida los pines de alimentación del Arduino.</p>
+<div class="admonition danger">
+<p class="admonition-title">Ajustar la tensión de salida</p>
+</div>
+<ul>
+<li>Antes de conectar la salida del regulador a los pines de alimentación del Arduino hay que ajustar el valor de voltaje de salida. Para ajustarlo se usa el potenciómetro azul de la placa hasta que midas con el multímetro 8 voltios a la salida.</li>
+</ul>
+<p><img alt="Regulador de tensión" src="img/Robotarium_regulador.jpg" /></p>
+<h3 id="conectar-la-placa-de-control-de-los-motores">Conectar la placa de control de los motores</h3>
+<p>Para poder accionar los motores se usa una placa controladora con un puente en H. A esta placa es a la que se conectan los motores y las salidas de Arduino con las que vamos a controlarlos.</p>
+<p><img alt="Puente en H para controlar los motores" src="img/Robotarium_puenteH.jpg" /></p>
+<p>Ya sólo queda colocar el Arduino, el interruptor y conectar correctamente entre ellos todos los sistemas.</p>
+<p><img alt="Colocación de las placas en el chásis del robot" src="img/Robotarium_ColocacionPlacas.jpg" /></p>
+<p><img alt="Montaje final" src="img/Robotarium_MontajeFinal1.jpg" /></p>
+<table>
+<thead>
+<tr>
+<th>Batería</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batería +</td>
+<td>Interruptor</td>
+</tr>
+<tr>
+<td>Batería -</td>
+<td>Regulador IN -</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Interruptor</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interruptor 1</td>
+<td>Batería +</td>
+</tr>
+<tr>
+<td>Interruptor 2</td>
+<td>Regulador IN +</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Regulador</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>In +</td>
+<td>Interruptor 1</td>
+</tr>
+<tr>
+<td>In -</td>
+<td>Batería -</td>
+</tr>
+<tr>
+<td>Out +</td>
+<td>Puente en H VD</td>
+</tr>
+<tr>
+<td>Out -</td>
+<td>Puente en H GND</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Puente en H</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VD</td>
+<td>Regulador Out +</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Regulador Out -</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Arduino GND</td>
+</tr>
+<tr>
+<td>VS</td>
+<td>Arduino VIN</td>
+</tr>
+<tr>
+<td>E1</td>
+<td>Arduino D2</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>Arduino D3</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>Arduino D4</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>Arduino D5</td>
+</tr>
+<tr>
+<td>M1+</td>
+<td>Motor1 +</td>
+</tr>
+<tr>
+<td>M1-</td>
+<td>Motor1 -</td>
+</tr>
+<tr>
+<td>M2+</td>
+<td>Motor2 +</td>
+</tr>
+<tr>
+<td>M2-</td>
+<td>Motor2 -</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Sensor Infrarrojo Derecho</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VCC</td>
+<td>Arduino Rst</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Arduino GND</td>
+</tr>
+<tr>
+<td>D0</td>
+<td>Arduino D6</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Sensor Infrarrojo Izquierdo</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VCC</td>
+<td>Arduino Rst</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Arduino GND</td>
+</tr>
+<tr>
+<td>D0</td>
+<td>Arduino D7</td>
+</tr>
+</tbody>
+</table>
 <p>Esto es un ejmplo de inclusión de una figura (puede ser .JPG, .PNG...)</p>
 <p><img alt="ejemplo figura" src="img/robot.jpg" /></p>
 <h2 id="ejemplo-de-codigo">Ejemplo de código</h2>
@@ -193,5 +392,5 @@ else
 
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2023-01-13 19:36:12.065173+00:00
+Build Date UTC : 2023-01-18 10:50:14.643916+00:00
 -->
