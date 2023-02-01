@@ -52,7 +52,7 @@ Fijad los sensores con cinta de doble cara como se indica en las imágenes.
 Para alimentar toda la electrónica necesitamos un regulador de tensión. A la entrada de este regulador se conecta la batería y a la salida los pines de alimentación del Arduino.
 
 !!! danger "Ajustar la tensión de salida"
-* Antes de conectar la salida del regulador a los pines de alimentación del Arduino hay que ajustar el valor de voltaje de salida. Para ajustarlo se usa el potenciómetro azul de la placa hasta que midas con el multímetro 8 voltios a la salida.
+	* Antes de conectar la salida del regulador a los pines de alimentación del Arduino hay que ajustar el valor de voltaje de salida. Para ajustarlo se usa el potenciómetro azul de la placa hasta que midas con el multímetro 8 voltios a la salida.
 
 ![Regulador de tensión](img/Robotarium_regulador.jpg)
 
@@ -113,6 +113,10 @@ Ya sólo queda colocar el Arduino, el interruptor y conectar correctamente entre
 |VCC| Arduino Rst|
 |GND| Arduino GND|
 |D0| Arduino D7|
+
+### Descargar el firmware del robot
+
+
 
 Esto es un ejmplo de inclusión de una figura (puede ser .JPG, .PNG...)
 
