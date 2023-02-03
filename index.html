@@ -146,6 +146,10 @@ El único paso que no figura en las instrucciones es la manera de colocar la rue
 <h3 id="conectar-la-placa-de-control-de-los-motores">Conectar la placa de control de los motores</h3>
 <p>Para poder accionar los motores se usa una placa controladora con un puente en H. A esta placa es a la que se conectan los motores y las salidas de Arduino con las que vamos a controlarlos.</p>
 <p><img alt="Puente en H para controlar los motores" src="img/Robotarium_puenteH.jpg" /></p>
+<div class="admonition danger">
+<p class="admonition-title">Quita los jumpers que unen los pines ENA y ENB de la placa del puente en H</p>
+</div>
+<p><img alt="Puente en H para controlar los motores" src="img/Robotarium_jumperspuenteH.jpg" /></p>
 <p>Ya sólo queda colocar el Arduino, el interruptor y conectar correctamente entre ellos todos los sistemas.</p>
 <p><img alt="Colocación de las placas en el chásis del robot" src="img/Robotarium_ColocacionPlacas.jpg" /></p>
 <p><img alt="Montaje final" src="img/Robotarium_MontajeFinal1.jpg" /></p>
@@ -220,10 +224,6 @@ El único paso que no figura en las instrucciones es la manera de colocar la rue
 </thead>
 <tbody>
 <tr>
-<td>VD</td>
-<td>Regulador Out +</td>
-</tr>
-<tr>
 <td>GND</td>
 <td>Regulador Out -</td>
 </tr>
@@ -232,39 +232,51 @@ El único paso que no figura en las instrucciones es la manera de colocar la rue
 <td>Arduino GND</td>
 </tr>
 <tr>
-<td>VS</td>
+<td>+12</td>
 <td>Arduino VIN</td>
 </tr>
 <tr>
-<td>E1</td>
-<td>Arduino D2</td>
+<td>+12</td>
+<td>Regulador Out +</td>
 </tr>
 <tr>
-<td>M1</td>
-<td>Arduino D3</td>
-</tr>
-<tr>
-<td>E2</td>
+<td>ENA</td>
 <td>Arduino D4</td>
 </tr>
 <tr>
-<td>M2</td>
+<td>IN1</td>
+<td>Arduino D2</td>
+</tr>
+<tr>
+<td>IN2</td>
+<td>Arduino D3</td>
+</tr>
+<tr>
+<td>IN3</td>
 <td>Arduino D5</td>
 </tr>
 <tr>
-<td>M1+</td>
+<td>IN4</td>
+<td>Arduino D6</td>
+</tr>
+<tr>
+<td>ENB</td>
+<td>Arduino D7</td>
+</tr>
+<tr>
+<td>OUT1</td>
 <td>Motor1 +</td>
 </tr>
 <tr>
-<td>M1-</td>
+<td>OUT2</td>
 <td>Motor1 -</td>
 </tr>
 <tr>
-<td>M2+</td>
+<td>OUT3</td>
 <td>Motor2 +</td>
 </tr>
 <tr>
-<td>M2-</td>
+<td>OUT4</td>
 <td>Motor2 -</td>
 </tr>
 </tbody>
@@ -415,6 +427,6 @@ else
 </html>
 
 <!--
-MkDocs version : 1.3.0
-Build Date UTC : 2023-02-02 17:07:59.734450+00:00
+MkDocs version : 1.4.2
+Build Date UTC : 2023-02-03 13:55:35.634737+00:00
 -->
