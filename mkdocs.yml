@@ -3,3 +3,4 @@ markdown_extensions:
     - admonition
 nav:
   - IX Semana Informática: index.md
+  - hack-the-lock: hack-the-lock/index.md
