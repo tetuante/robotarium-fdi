@@ -60,7 +60,12 @@ Para alimentar toda la electrónica necesitamos un regulador de tensión. A la e
 
 Para poder accionar los motores se usa una placa controladora con un puente en H. A esta placa es a la que se conectan los motores y las salidas de Arduino con las que vamos a controlarlos.
 
+
 ![Puente en H para controlar los motores](img/Robotarium_puenteH.jpg)
+
+!!!danger "Quita los jumpers que unen los pines ENA y ENB de la placa del puente en H"
+
+![Puente en H para controlar los motores](img/Robotarium_jumperspuenteH.jpg)
 
 Ya sólo queda colocar el Arduino, el interruptor y conectar correctamente entre ellos todos los sistemas.
 
@@ -88,18 +93,20 @@ Ya sólo queda colocar el Arduino, el interruptor y conectar correctamente entre
 
 |Puente en H | |
 |---|---|
-|VD| Regulador Out +|
 |GND| Regulador Out -|
 |GND| Arduino GND  |
-|VS| Arduino VIN|
-|E1| Arduino D2|
-|M1| Arduino D3|
-|E2| Arduino D4|
-|M2| Arduino D5|
-|M1+| Motor1 +|
-|M1-| Motor1 -|
-|M2+| Motor2 +|
-|M2-| Motor2 -|
+|+12| Arduino VIN|
+|+12| Regulador Out +|
+|ENA| Arduino D4|
+|IN1| Arduino D2|
+|IN2| Arduino D3|
+|IN3| Arduino D5|
+|IN4| Arduino D6|
+|ENB| Arduino D7|
+|OUT1| Motor1 +|
+|OUT2| Motor1 -|
+|OUT3| Motor2 +|
+|OUT4| Motor2 -|
 
 
 |Sensor Infrarrojo Derecho||
