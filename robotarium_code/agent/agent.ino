@@ -21,8 +21,8 @@ struct appdata *server_operation;
 //prototypes//
 
 void motorSetup();
-void moveForward(const int pinMotor[2], int speed);
-void moveBackward(const int pinMotor[2], int speed);
+void moveForward(const int pinMotor[3], int speed);
+void moveBackward(const int pinMotor[3], int speed);
 void fullStop(const int pinMotor[3]);
 
 void isrD();
@@ -64,31 +64,36 @@ void loop() {
 // Funcion que inicializa los pines de control de los motores de Arduino en modo salida
 void motorSetup() {
   pinMode(pinIN1, OUTPUT);
+  pinMode(pinIN2, OUTPUT);
   pinMode(pinENA, OUTPUT);
   pinMode(pinIN3, OUTPUT);
   pinMode(pinENB, OUTPUT);
+  pinMode(pinIN4, OUTPUT);
 }
 
 // Mueve hacia adelante el motor conectado a los pines pinMotor[2] con un valor de pwm indicado por speed
 // speed vale entre 0 y 255
 
-void moveForward(const int pinMotor[2], int speed) {
+void moveForward(const int pinMotor[3], int speed) {
   digitalWrite(pinMotor[1], HIGH);
+  digitalWrite(pinMotor[2], LOW);
   analogWrite(pinMotor[0], speed);
 }
 
 // Mueve hacia atrás el motor conectado a los pines pinMotor[2] con un valor de pwm indicado por speed
 // speed vale entre 0 y 255
 
-void moveBackward(const int pinMotor[2], int speed) {
+void moveBackward(const int pinMotor[3], int speed) {
   digitalWrite(pinMotor[1], LOW);
+  digitalWrite(pinMotor[2],HIGH);
   analogWrite(pinMotor[0], speed);
 }
 
 // Para el motor conectado a los pines pinMotor[2]
 
-void fullStop(const int pinMotor[2]) {
-  digitalWrite(pinMotor[1], HIGH);
+void fullStop(const int pinMotor[3]) {
+  digitalWrite(pinMotor[1], LOW);
+  digitalWrite(pinMotor[2],LOW);
   analogWrite(pinMotor[0], 0);
 }
 
