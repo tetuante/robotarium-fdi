@@ -6,6 +6,78 @@ Recuerda que si quieres obtener ECTS por participar en actividades de la Seamana
 [debes inscribire en este formulario](https://web.fdi.ucm.es/ActividadesFormativas/). si no lo has hecho ya.
 
  
+## Equipos participantes
+
+Estos son los equipos participantes:
+
+!!! danger "Equipos"
+    |  Equipo  | NOMBRE   | PUNTOS | POSICIÓN |
+    |---|---|---|---|
+    |  Equipo 1 |    |  |  |
+    |  Equipo 2 |   |  | |
+    |  Equipo 3 |    | | |
+    |  Equipo 4 |   | | |
+    |  Equipo 5 |   | | |
+
+
+|  Equipo 1 | NOMBRE   |
+|---|---|
+|Estudiante 1   |    |
+|Estudiante 2   |    |
+|Estudiante 3   |    |
+|Puntos Misión 1   |    |
+|Puntos Misión 2   |    |
+|Puntos Misión 3   |    |
+|Puntos Misión 4   |    |
+|TOTAL   |    |
+
+
+|  Equipo 2 | NOMBRE   |
+|---|---|
+|Estudiante 1   |    |
+|Estudiante 2   |    |
+|Estudiante 3   |    |
+|Puntos Misión 1   |    |
+|Puntos Misión 2   |    |
+|Puntos Misión 3   |    |
+|Puntos Misión 4   |    |
+|TOTAL   |    |
+
+
+|  Equipo 3 | NOMBRE   |
+|---|---|
+|Estudiante 1   |    |
+|Estudiante 2   |    |
+|Estudiante 3   |    |
+|Puntos Misión 1   |    |
+|Puntos Misión 2   |    |
+|Puntos Misión 3   |    |
+|Puntos Misión 4   |    |
+|TOTAL   |    |
+
+
+|  Equipo 4 | NOMBRE   |
+|---|---|
+|Estudiante 1   |    |
+|Estudiante 2   |    |
+|Estudiante 3   |    |
+|Puntos Misión 1   |    |
+|Puntos Misión 2   |    |
+|Puntos Misión 3   |    |
+|Puntos Misión 4   |    |
+|TOTAL   |    |
+
+
+|  Equipo 5 | NOMBRE   |
+|---|---|
+|Estudiante 1   |    |
+|Estudiante 2   |    |
+|Estudiante 3   |    |
+|Puntos Misión 1   |    |
+|Puntos Misión 2   |    |
+|Puntos Misión 3   |    |
+|Puntos Misión 4   |    |
+|TOTAL   |    |
 
 ## Estructura del Taller
 
@@ -16,8 +88,13 @@ Este taller se compone de varias fases:
 * `Hacer un círculo` - Programaréis el robot para que recorra un círculo de 1m de radio. 
 * `Hacer un cuadrado` - Programaréis el robot para que recorra un cuadrado. ¡Cuidado con las esquinas!
 
-## Fase 1: Construcción del Robot
+##  Misión 1: Construcción del Robot
 
+!!! note "Misión 1"
+    * Construye el robot y consigue que se muevan sus motores.
+    * El primer equipo en lograrlo tendrá puntos extra.
+    
+    
 En esta primera etapa el objetivo es que montéis el chasis del robot y realicéis todas las conexiones necesarias para que el robot pueda mover las ruedas.
 Para ello tendréis que seguir los siguientes pasos:
 
@@ -26,6 +103,9 @@ Para ello tendréis que seguir los siguientes pasos:
 3. *Conectar la alimentación*
 4. *Conectar los motores* con la placa de control y el Arduino
 
+
+    
+    
 Vamos paso a paso.
 
 ### Montar la el chasis rojo
@@ -123,28 +203,63 @@ Ya sólo queda colocar el Arduino, el interruptor y conectar correctamente entre
 
 ### Descargar el firmware del robot
 
+Ya lo tienes listo para descargar el firmware del robot y ¡¡empezar a programar!!
+El código base necesario lo tienes disponible en [nuestro repo de github](https://github.com/tetuante/robotarium-fdi/tree/main/robotarium_code/agent)
 
+Descárgalo y ábrelo con el IDE de Arduino. Verás que hay dos archivos:
 
-Esto es un ejmplo de inclusión de una figura (puede ser .JPG, .PNG...)
++ **agent.ino** es el código principal de Arduino. Es en este archivo donde tienes las funciones principales que puedes usar y que os damos para facilitar la puesta en marcha y donde tendrás que escribir tu código.
++ **common.h** contiene las definiciones de variables y estructuras
 
-![ejemplo figura](img/robot.jpg)
-
-## Ejemplo de código
+Puedes conseguir que el robot mueva las ruedas usando las siguientes funciones:
 
 ```c
-if (a==b)
-    turn_right();
-else
-    turn_left();
+moveForward(const int pinMotor[3],int speed);
+moveBackward(const int pinMotor[3],int speed);
+fullStop(const int pinMotor[3]);
+```
+Esas tres funciones reciben como parámetro el array donde están almacenados los tres pines donde está conectado el motor (puedes verla definición en common.h). También reciben el parámetro speed, que es un entero entre 0 y 255 que indica la potencia que se quiere comandar al motor.
+
+Así que sólo tienes que indicar el array del motor que quieres mover y la velocidad.
+
+!!! danger "Atencion"
+	* Los motores tienen una **zona muerta** ya que necesitan una potencia eléctrica mínima para comenzar a mover el eje,
+	* La **zona muerta** es diferente para cada motor
+
+!!! note "Misión 1"
+    * ¿Tienes el robot completamente montado y logras mover ya los motores? Corre y enséñanoslo.
+    * El primer equipo en conseguirlo tendrá 10 puntos, el siguiente 8, el tercero 6 etc...
+    
+
+## Misión 2: Recorrer 2m
+
+!!! note "Misión 2"
+    * Vuestra misión ahora es conseguir que el robot recorra 2m en línea recta
+    * El equipo cuyo robot recorra la distancia de 2m con menos error recibirá 10 puntos, el segundo 8 y así sucesivamente.
+    * Además el equipo que primero consiga recorrer 2m (más menos 20 cm) recibirá 2 puntos adicionales.
+   
+¿Os parece una misión sencilla? Tal vez no lo es tanto.
+
+Para saber la distancia que ha recorrido el robot tendréis que usar los encoders. Nuestros enconders están formados por un sensor de infrarrojos y una rueda con ranuras  para cada rueda del robot. La  rueda con ranuras gira solidaria con la rueda del robot, de manera que el sensor de infrarrojos detecta el paso de las ranuras. Contando las ranuras que el sensor detecta en un tiempo determinado y conociendo el diámetro de las ruedas de nuestro robot podemos calcular la distancia que recorre cada rueda.
+
+![Funcionamiento del encoder del robot](img/Robotarium_encoder_esquema.jpeg)
+
+Puedes obtener las lecturas de los encoders de las dos ruedas usando las siguientes funciones
+```c
 ```
 
-## Cuadros de colores
+## Misión 3: Recorrer una trayectoria circular de radio 1m
 
-!!! note "Cuestión"
-    * ¿Qué componente se está incluyendo además de los que siempre se incluyen por defecto?
-    * ¿Qué funcionalidad se importa de dicho componente?
+!!! note "Misión 3"
+    * Vuestra misión ahora es conseguir que el robot recorra una trayectoria circular de radio 1m moviéndose en el sentido de las agujas del reloj.
+    * El equipo cuyo robot recorra el círculo con menos error recibirá 10 puntos, el segundo 8 y así sucesivamente.
+    * Además el equipo que primero consiga recorrer el círculo con corrección recibirá 2 puntos adicionales.
 
 
-!!! danger "Tareas"
-    * Crea dos nuevos componentes en el proyecto creado a partir del ejemplo. Uno de ellos tendrá al menos una función `int get_hall_read()` que proporcionará una lectura del sensor de efecto Hall. El otro tendrá al menos una función `int get_temperature()` que deolverá la temperatura medida en grados Celsius obtenida del sensor Si7021. Los componentes podrán tener más funciones, tanto públicas como privadas. Antes de comenzar el REPL (que comienza con la llamada `esp_console_start_repl()`) se deberá mostrar por terminal una lectura de cada sensor.
+## Misión 4: Recorrer una trayectoria cuadrada de lado 1m
+
+!!! note "Misión final"
+     * Esta es la misión más complicada. Vuestro robot deberá recorrer un cuadrado de 1m de lado en el sentido de las agujas del reloj.
+     * El equipo cuyo robot recorra el cuadrado con menos error recibirá 10 puntos, el segundo 8 y así sucesivamente.
+     * Además el equipo que primero consiga recorrer el cuadrado con corrección recibirá 2 puntos adicionales.
 
