@@ -98,16 +98,14 @@ short bytesToShort(unsigned char *b)
 
 
      //     ---------------motor setup---------------*/
-const int pinENA = 12;//señal de PWM
-const int pinIN1 = 7;//indica sentido de giro
-const int pinIN2 = 8;//indica sentido de giro
+const int pinENA = 2;//señal de PWM
+const int pinIN1 = 4;//indica sentido de giro
 
-const int pinIN3 = 9;//indica sentido de giro
-const int pinIN4 = 10;
-const int pinENB = 11;//Señal de PWM
+const int pinIN3 = 7;//indica sentido de giro
+const int pinENB = 3;//Señal de PWM
 
-const int pinMotorI[3] = { pinENA, pinIN1, pinIN2 };
-const int pinMotorD[3] = { pinENB, pinIN3, pinIN4 };
+const int pinMotorI[2] = { pinENA, pinIN1};
+const int pinMotorD[2] = { pinENB, pinIN3};
 
 //-----------------contador encoder------------------------------------------------------------------------------------
 const int             N=                  20;//Resolucion encoder       
