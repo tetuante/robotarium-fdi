@@ -231,25 +231,5 @@ int feedforward(int motor) {
 //                            desde la última invocación.
 // -----------------------------------------------------------------------------
 void update_control(double count_left_wheel, double count_right_wheel, double dt_s) {
-  double w_right_wheel = count_right_wheel / dt_s / encoder_resolution_ppt; // rps 
-  double w_left_wheel = count_left_wheel / dt_s / encoder_resolution_ppt; // rps 
-  double u_right = pid_right_motor(w_right_wheel); 
-  double u_left = pid_left_motor(w_left_wheel);
-  set_wheel_speed(LEFT_WHEEL, FORWARD, u_left);
-  set_wheel_speed(RIGHT_WHEEL, FORWARD, u_right);
-  Serial.print(" Period: ");
-  Serial.print(dt_s);
-  Serial.print(", Left wheel: ");
-  Serial.print(w_left_wheel);
-  Serial.print(", ");
-  Serial.print(encoder_count[LEFT_WHEEL]);
-  Serial.print(", Right wheel: ");
-  Serial.print(w_right_wheel);
-  Serial.print(", ");
-  Serial.print(encoder_count[RIGHT_WHEEL]);
-  Serial.print(", I[0]: ");
-  Serial.print(I_prev[0]);
-  Serial.print(", I[1]: ");
-  Serial.print(I_prev[1]);
-  Serial.println();
+  // Pon aquí tu código
 }
