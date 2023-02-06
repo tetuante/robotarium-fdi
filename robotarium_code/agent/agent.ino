@@ -225,8 +225,8 @@ int feedforward(int motor) {
 //
 // params
 // ------
-//   double w_left_wheel_rps  Velocidad angular de la rueda izquierda. 
-//   double w_right_wheel_rps Velocidad angular de la rueda derecha. 
+//   double count_left_wheel  Incremento de cuentas de encoder de la rueda izquierda. 
+//   double count_right_wheel Incremento de cuentas de encoder de la rueda derecha. 
 //   double dt_s              Indica el tiempo real, en segundos, transcurrido
 //                            desde la última invocación.
 // -----------------------------------------------------------------------------
