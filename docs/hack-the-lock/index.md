@@ -85,9 +85,14 @@ sudo apt-get install libpcap-dev libnetfilter-queue-dev
 
 ## Apks y utilidades
 
+### Android Apk
+
 Os dejo dos versiones antiguas de la **App Oklok** que no están muy ofuscadas:
+
 *  [oklok_v1.3.0.apk](oklok_v1.3.0.apk) 
 *  [oklok_v1.5.7.apk](oklok_v1.5.7.apk) 
+
+### Script Frida
 
 Script para **conseguir la clave** mediante Frida:
 
@@ -128,6 +133,8 @@ Java.perform(function ()
     };
 });
 ```
+
+### Script de apertura
 
 Script **Python 2** para abrir el candado (una vez que **conocemos la clave AES**):
 
@@ -189,4 +196,115 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+
+### Análisis de tráfico BT de una secuencia de apertura
+
+Ejemplo de captura y análisis de tráfico mediante Wireshark:  [btsnoop_hci.log](btsnoop_hci.log) 
+
+Salida de Frida por pantalla:
+
+```bash
+$ frida -U -l oklok-frida_new.js com.oklok.y
+     ____
+    / _  |   Frida 14.2.8 - A world-class dynamic instrumentation toolkit
+   | (_| |
+    > _  |   Commands:
+   /_/ |_|       help      -> Displays the help system
+   . . . .       object?   -> Display information about 'object'
+   . . . .       exit/quit -> Exit
+   . . . .
+   . . . .   More info at https://www.frida.re/docs/home/
+                                                                                
+[VirtualBox::com.oklok.y]->
+[VirtualBox::com.oklok.y]-> 
+[+] Inside Encrypt()  ======
+Pt:
+060101015705162b7c5b34162b4b4b2e    -->  Traza Nº 101
+key:
+034100624f0a29355c193f1a39192356
+[+] Inside Encrypt()  ======
+Pt:
+0602077464a8bd010205000000000000    -->  Traza Nº 103
+Key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+06010101644c391e5b6a4f3237477a78    -->  Traza Nº 105
+key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+0602077464a8bd010205000000000000    -->  Traza Nº 107
+Key:
+034100624f0a29355c193f1a39192356
+[+] Inside Encrypt()  ======
+Pt:
+020101017464a8bd2f22114d0c157e65    -->  Traza Nº 109
+key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+0202015e64a8bd010205000000000000    -->  Traza Nº 112
+Key:
+034100624f0a29355c193f1a39192356
+[+] Inside Encrypt()  ======
+Pt:
+0501063030303030307464a8bd1f0375    -->  Traza Nº 113
+key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+0502010064a8bd010205000000000000    -->  Traza Nº 121
+Key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+050d010064a8bd010205000000000000    -->  Traza Nº 123
+Key:
+034100624f0a29355c193f1a39192356
+Process terminated
+[VirtualBox::com.oklok.y]->
+
+```
+
+Script de Python 2 análisis de trazas:
+
+```python
+#!/usr/bin/python2.7
+
+from Crypto.Cipher import AES
+import binascii
+
+aeskey="034100624f0a29355c193f1a39192356"
+aesobj = AES.new(aeskey.decode("hex"), AES.MODE_ECB)
+
+wiresharkpacket = "64642f5d28a845260d9c3b7464d1003f"
+print "Traza 101: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+
+wiresharkpacket = "b7375edcb4311b888c78b794fa828853"
+print "Traza 103: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+
+wiresharkpacket = "d349035cb778578f78761a9b6b2344fd"
+print "Traza 105: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+
+wiresharkpacket = "b7375edcb4311b888c78b794fa828853"
+print "Traza 107: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+
+wiresharkpacket = "e2608fd9ec82d3f082962256188ca320"
+print "Traza 109: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+
+wiresharkpacket = "7c961523beeabc82b97305e1facb1d41"
+print "Traza 112: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+
+wiresharkpacket = "62a0972768b33fbe2fb95456c36b9bf6"
+print "Traza 113: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+
+wiresharkpacket = "71dda074a979da25e1b51f51d8689a72"
+print "Traza 121: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+
+wiresharkpacket = "e8a8855bb311de5ad1d12e79a5206d89"
+print "Traza 123: " + str(aesobj.decrypt(wiresharkpacket.decode("hex")).encode('hex'))
+```
+
+
 
