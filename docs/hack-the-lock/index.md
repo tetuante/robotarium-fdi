@@ -13,6 +13,12 @@ Las versiones antiguas del candado tienen una vulnerabilidad conocida y document
 
 El objetivo de este taller consiste en ser capaces de encontrar la clave de acceso mediante el estudio e instrumentación de la nueva aplicación. Para ello os explicaré cómo se conseguía la clave usando la aplicación antigua ([M-IoT S&L P2: Pentest_Lock](Pentest_Lock.pdf)), con la esperanza de que algún hacker sea capaz de obtener claves nuevas de los candados que tenemos en la FDI y así poder volver a utilizar la práctica dentro de la asignatura Seguridad y Legalidad del Máster de IoT. 
 
+Existe otro agujero de seguridad documentado que puede resultar de utilidad: 
+
+* [Transfer ownership of any FB50 smart lock to yourself (CVE-2019-13143)](https://github.com/securelayer7/pwnfb50)
+* [FB50 Smart Lock Vulnerability Disclosure (CVE-2019-13143)](https://blog.securelayer7.net/fb50-smart-lock-vulnerability-disclosure/)
+* [Picking the FB50 smart lock (CVE-2019-13143)](https://icyphox.sh/blog/fb50/)
+
 # Material necesario
 
 Para intentar replicar el hack necesitaremos un ordenador con Linux instalado y un dispositivo Android *rooteado*. Para facilitar la tarea os dejo una imagen de una máquina virtual de **Ubuntu Mate** y una imagen de **Android para Raspberry Pi 4**.
