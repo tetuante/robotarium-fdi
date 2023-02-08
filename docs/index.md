@@ -22,9 +22,9 @@ Estos son los equipos participantes:
 
 |  Equipo 1 | NOMBRE   |
 |---|---|
-|Estudiante 1   |    |
-|Estudiante 2   |    |
-|Estudiante 3   |    |
+|Eva   |    |
+|Sai  |    |
+|Jing   |    |
 |Puntos Misión 1   |    |
 |Puntos Misión 2   |    |
 |Puntos Misión 3   |    |
@@ -34,10 +34,10 @@ Estos son los equipos participantes:
 
 |  Equipo 2 | NOMBRE   |
 |---|---|
-|Estudiante 1   |    |
-|Estudiante 2   |    |
-|Estudiante 3   |    |
-|Puntos Misión 1   |    |
+|Javi   |    |
+|Rocío   |    |
+|Noe   |    |
+|Juan   |    |
 |Puntos Misión 2   |    |
 |Puntos Misión 3   |    |
 |Puntos Misión 4   |    |
@@ -46,10 +46,10 @@ Estos son los equipos participantes:
 
 |  Equipo 3 | NOMBRE   |
 |---|---|
-|Estudiante 1   |    |
-|Estudiante 2   |    |
-|Estudiante 3   |    |
-|Puntos Misión 1   |    |
+|Araceli   |    |
+|Grivaldo   |    |
+|Micaela   |    |
+|Teovaldo   |    |
 |Puntos Misión 2   |    |
 |Puntos Misión 3   |    |
 |Puntos Misión 4   |    |
