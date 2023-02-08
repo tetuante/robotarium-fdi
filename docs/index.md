@@ -244,9 +244,8 @@ Para saber la distancia que ha recorrido el robot tendréis que usar los encoder
 
 ![Funcionamiento del encoder del robot](img/Robotarium_encoder_esquema.jpeg)
 
-Puedes obtener las lecturas de los encoders de las dos ruedas usando las siguientes funciones
-```c
-```
+Puedes obtener las lecturas de los encoders de las dos ruedas leyendo las variables count_left_wheel y count_right_wheel que son actualizadas con la función update que se llama cada 100 ms.
+Esta función actualiza también el valor de dt_s que es el tiempo transcurrido entre dos llamadas sucesivas
 
 ## Misión 3: Recorrer una trayectoria circular de radio 1m
 
@@ -263,3 +262,9 @@ Puedes obtener las lecturas de los encoders de las dos ruedas usando las siguien
      * El equipo cuyo robot recorra el cuadrado con menos error recibirá 10 puntos, el segundo 8 y así sucesivamente.
      * Además el equipo que primero consiga recorrer el cuadrado con corrección recibirá 2 puntos adicionales.
 
+# Valoración del taller
+
+!!! note "Encuesta"
+     * Por favor, rellena la encuesta de valoración del taller antes de marcharte 
+     * [Enlace a la encuesta](https://forms.gle/13VKj2Hnp82LM3ui7)
+     
