@@ -19,13 +19,15 @@ Existe otro agujero de seguridad documentado que puede resultar de utilidad:
 * [FB50 Smart Lock Vulnerability Disclosure (CVE-2019-13143)](https://blog.securelayer7.net/fb50-smart-lock-vulnerability-disclosure/)
 * [Picking the FB50 smart lock (CVE-2019-13143)](https://icyphox.sh/blog/fb50/)
 
+**Contacto:** [recas@ucm.es](mailto:recas@ucm.es)
+
 # Material necesario
 
 Para intentar replicar el hack necesitaremos un ordenador con Linux instalado y un dispositivo Android *rooteado*. Para facilitar la tarea os dejo una imagen de una máquina virtual de **Ubuntu Mate** y una imagen de **Android para Raspberry Pi 4**.
 
-## VirtualBox Ubuntu Mate 18.04 64b
+## Ubuntu Mate 18.04 64b
 
-En este enlace  [Ubuntu Mate 18.04.1 64b](https://drive.google.com/file/d/1eo9bX2aVQekpQcAm2UmuF1QA5-_ZrvyT/view?usp=share_link) os dejo una MV preparada con todo lo que listo a continuación. Para poder descargar el fichero deberéis de estar **identificados** con la cuenta de correo de la **UCM**.
+En este enlace  [Ubuntu Mate 18.04.1 64b](https://drive.google.com/file/d/1eo9bX2aVQekpQcAm2UmuF1QA5-_ZrvyT/view?usp=share_link) os dejo una MV preparada con todo lo que listo a continuación. Aquí podéis bajaros la versión para [Raspberry Pi 4](https://drive.google.com/file/d/1ymjP3LdZvsp1xyZh2556bu_nhEVnQjKm/view?usp=share_link). Para poder descargar el fichero deberéis de estar **identificados** con la cuenta de correo de la **UCM**.
 
 - Usuario/contraseña: `master_iot`/`SyL`
 
