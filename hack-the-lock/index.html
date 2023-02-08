@@ -110,6 +110,12 @@
 <p>El candado objetivo, modelo <strong>OKLOK Padlock</strong>, es un candado que se puede desbloquear mediante huella digital y usando una <a href="https://play.google.com/store/apps/details?id=com.oklok.lock&amp;hl=en&amp;gl=US">App Android</a> diseñada para tal efecto. </p>
 <p>Las versiones antiguas del candado tienen una vulnerabilidad conocida y documentada (<a href="https://eprints.ucm.es/62476/1/JESUS_ALBERTO_TEJEDOR_DORIA_Entrega_Final_TFM_Pentesting_Device_IoT_Smart_Doorlock_4286353_1929042718.pdf">TFM Jesus Alberto Tejedor Doria, 2020</a>, basado en <a href="https://www.attify.com/iot-security-pentesting">Attify Pentest kit</a>) que permitía <strong>averiguar la clave</strong> de desbloqueo de una manera relativamente sencilla. Sin embargo, el fabricante ha <strong>actualizado la aplicación de Android</strong>, complicando la obtención de dicha clave.</p>
 <p>El objetivo de este taller consiste en ser capaces de encontrar la clave de acceso mediante el estudio e instrumentación de la nueva aplicación. Para ello os explicaré cómo se conseguía la clave usando la aplicación antigua (<a href="Pentest_Lock.pdf">M-IoT S&amp;L P2: Pentest_Lock</a>), con la esperanza de que algún hacker sea capaz de obtener claves nuevas de los candados que tenemos en la FDI y así poder volver a utilizar la práctica dentro de la asignatura Seguridad y Legalidad del Máster de IoT. </p>
+<p>Existe otro agujero de seguridad documentado que puede resultar de utilidad: </p>
+<ul>
+<li><a href="https://github.com/securelayer7/pwnfb50">Transfer ownership of any FB50 smart lock to yourself (CVE-2019-13143)</a></li>
+<li><a href="https://blog.securelayer7.net/fb50-smart-lock-vulnerability-disclosure/">FB50 Smart Lock Vulnerability Disclosure (CVE-2019-13143)</a></li>
+<li><a href="https://icyphox.sh/blog/fb50/">Picking the FB50 smart lock (CVE-2019-13143)</a></li>
+</ul>
 <h1 id="material-necesario">Material necesario</h1>
 <p>Para intentar replicar el hack necesitaremos un ordenador con Linux instalado y un dispositivo Android <em>rooteado</em>. Para facilitar la tarea os dejo una imagen de una máquina virtual de <strong>Ubuntu Mate</strong> y una imagen de <strong>Android para Raspberry Pi 4</strong>.</p>
 <h2 id="virtualbox-ubuntu-mate-1804-64b">VirtualBox Ubuntu Mate 18.04 64b</h2>
