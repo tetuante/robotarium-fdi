@@ -103,6 +103,11 @@
             </li>
               </ul>
             </li>
+            
+            <li class="nav-item" data-level="1"><a href="#valoracion-del-taller" class="nav-link">Valoración del taller</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -638,8 +643,8 @@ fullStop(const int pinMotor[3]);
 <p>¿Os parece una misión sencilla? Tal vez no lo es tanto.</p>
 <p>Para saber la distancia que ha recorrido el robot tendréis que usar los encoders. Nuestros enconders están formados por un sensor de infrarrojos y una rueda con ranuras  para cada rueda del robot. La  rueda con ranuras gira solidaria con la rueda del robot, de manera que el sensor de infrarrojos detecta el paso de las ranuras. Contando las ranuras que el sensor detecta en un tiempo determinado y conociendo el diámetro de las ruedas de nuestro robot podemos calcular la distancia que recorre cada rueda.</p>
 <p><img alt="Funcionamiento del encoder del robot" src="img/Robotarium_encoder_esquema.jpeg" /></p>
-<p>Puedes obtener las lecturas de los encoders de las dos ruedas usando las siguientes funciones</p>
-<pre><code class="language-c"></code></pre>
+<p>Puedes obtener las lecturas de los encoders de las dos ruedas leyendo las variables count_left_wheel y count_right_wheel que son actualizadas con la función update que se llama cada 100 ms.
+Esta función actualiza también el valor de dt_s que es el tiempo transcurrido entre dos llamadas sucesivas</p>
 <h2 id="mision-3-recorrer-una-trayectoria-circular-de-radio-1m">Misión 3: Recorrer una trayectoria circular de radio 1m</h2>
 <div class="admonition note">
 <p class="admonition-title">Misión 3</p>
@@ -656,6 +661,14 @@ fullStop(const int pinMotor[3]);
 <li>Esta es la misión más complicada. Vuestro robot deberá recorrer un cuadrado de 1m de lado en el sentido de las agujas del reloj.</li>
 <li>El equipo cuyo robot recorra el cuadrado con menos error recibirá 10 puntos, el segundo 8 y así sucesivamente.</li>
 <li>Además el equipo que primero consiga recorrer el cuadrado con corrección recibirá 2 puntos adicionales.</li>
+</ul>
+</div>
+<h1 id="valoracion-del-taller">Valoración del taller</h1>
+<div class="admonition note">
+<p class="admonition-title">Encuesta</p>
+<ul>
+<li>Por favor, rellena la encuesta de valoración del taller antes de marcharte </li>
+<li><a href="https://forms.gle/13VKj2Hnp82LM3ui7">Enlace a la encuesta</a></li>
 </ul>
 </div></div>
             </div>
@@ -738,5 +751,5 @@ fullStop(const int pinMotor[3]);
 
 <!--
 MkDocs version : 1.4.2
-Build Date UTC : 2023-02-08 12:19:02.581555+00:00
+Build Date UTC : 2023-02-08 14:09:44.328598+00:00
 -->
