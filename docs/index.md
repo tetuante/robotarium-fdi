@@ -177,12 +177,12 @@ Ya sólo queda colocar el Arduino, el interruptor y conectar correctamente entre
 |GND| Arduino GND  |
 |+12| Arduino VIN|
 |+12| Regulador Out +|
-|ENA| Arduino D4|
-|IN1| Arduino D2|
-|IN2| Arduino D3|
-|IN3| Arduino D5|
-|IN4| Arduino D6|
-|ENB| Arduino D7|
+|ENA| Arduino D6|
+|IN1| Arduino D4|
+|IN2| Arduino D5|
+|IN3| Arduino D7|
+|IN4| Arduino D8|
+|ENB| Arduino D9|
 |OUT1| Motor1 +|
 |OUT2| Motor1 -|
 |OUT3| Motor2 +|
@@ -193,13 +193,13 @@ Ya sólo queda colocar el Arduino, el interruptor y conectar correctamente entre
 |---|---|
 |VCC| Arduino Rst|
 |GND| Arduino GND|
-|D0| Arduino D6|
+|D0| Arduino D2|
 
 |Sensor Infrarrojo Izquierdo||
 |---|---|
 |VCC| Arduino Rst|
 |GND| Arduino GND|
-|D0| Arduino D7|
+|D0| Arduino D3|
 
 ### Descargar el firmware del robot
 
