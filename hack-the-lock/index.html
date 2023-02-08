@@ -187,9 +187,13 @@ sudo addgroup masteriot wireshark
 <li>Servidor frida:  <a href="frida-server-14.2.8-android-arm">frida-server-14.2.8-android-arm</a> </li>
 </ul>
 <h2 id="apks-y-utilidades">Apks y utilidades</h2>
-<p>Os dejo dos versiones antiguas de la <strong>App Oklok</strong> que no están muy ofuscadas:
-*  <a href="oklok_v1.3.0.apk">oklok_v1.3.0.apk</a> 
-*  <a href="oklok_v1.5.7.apk">oklok_v1.5.7.apk</a> </p>
+<h3 id="android-apk">Android Apk</h3>
+<p>Os dejo dos versiones antiguas de la <strong>App Oklok</strong> que no están muy ofuscadas:</p>
+<ul>
+<li><a href="oklok_v1.3.0.apk">oklok_v1.3.0.apk</a> </li>
+<li><a href="oklok_v1.5.7.apk">oklok_v1.5.7.apk</a> </li>
+</ul>
+<h3 id="script-frida">Script Frida</h3>
 <p>Script para <strong>conseguir la clave</strong> mediante Frida:</p>
 <pre><code class="language-java">Java.perform(function () 
 {
@@ -227,6 +231,7 @@ sudo addgroup masteriot wireshark
     };
 });
 </code></pre>
+<h3 id="script-de-apertura">Script de apertura</h3>
 <p>Script <strong>Python 2</strong> para abrir el candado (una vez que <strong>conocemos la clave AES</strong>):</p>
 <pre><code class="language-python">from bluepy.btle import Scanner, Peripheral, DefaultDelegate
 from Crypto.Cipher import AES
@@ -284,6 +289,107 @@ def main():
             break            
 if __name__ == '__main__':
     main()
+</code></pre>
+<h3 id="analisis-de-trafico-bt-de-una-secuencia-de-apertura">Análisis de tráfico BT de una secuencia de apertura</h3>
+<p>Ejemplo de captura y análisis de tráfico mediante Wireshark:  <a href="btsnoop_hci.log">btsnoop_hci.log</a> </p>
+<p>Salida de Frida por pantalla:</p>
+<pre><code class="language-bash">$ frida -U -l oklok-frida_new.js com.oklok.y
+     ____
+    / _  |   Frida 14.2.8 - A world-class dynamic instrumentation toolkit
+   | (_| |
+    &gt; _  |   Commands:
+   /_/ |_|       help      -&gt; Displays the help system
+   . . . .       object?   -&gt; Display information about 'object'
+   . . . .       exit/quit -&gt; Exit
+   . . . .
+   . . . .   More info at https://www.frida.re/docs/home/
+
+[VirtualBox::com.oklok.y]-&gt;
+[VirtualBox::com.oklok.y]-&gt; 
+[+] Inside Encrypt()  ======
+Pt:
+060101015705162b7c5b34162b4b4b2e    --&gt;  Traza Nº 101
+key:
+034100624f0a29355c193f1a39192356
+[+] Inside Encrypt()  ======
+Pt:
+0602077464a8bd010205000000000000    --&gt;  Traza Nº 103
+Key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+06010101644c391e5b6a4f3237477a78    --&gt;  Traza Nº 105
+key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+0602077464a8bd010205000000000000    --&gt;  Traza Nº 107
+Key:
+034100624f0a29355c193f1a39192356
+[+] Inside Encrypt()  ======
+Pt:
+020101017464a8bd2f22114d0c157e65    --&gt;  Traza Nº 109
+key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+0202015e64a8bd010205000000000000    --&gt;  Traza Nº 112
+Key:
+034100624f0a29355c193f1a39192356
+[+] Inside Encrypt()  ======
+Pt:
+0501063030303030307464a8bd1f0375    --&gt;  Traza Nº 113
+key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+0502010064a8bd010205000000000000    --&gt;  Traza Nº 121
+Key:
+034100624f0a29355c193f1a39192356
+[+] Inside Decrypt()  ======
+Pt:
+050d010064a8bd010205000000000000    --&gt;  Traza Nº 123
+Key:
+034100624f0a29355c193f1a39192356
+Process terminated
+[VirtualBox::com.oklok.y]-&gt;
+
+</code></pre>
+<p>Script de Python 2 análisis de trazas:</p>
+<pre><code class="language-python">#!/usr/bin/python2.7
+
+from Crypto.Cipher import AES
+import binascii
+
+aeskey=&quot;034100624f0a29355c193f1a39192356&quot;
+aesobj = AES.new(aeskey.decode(&quot;hex&quot;), AES.MODE_ECB)
+
+wiresharkpacket = &quot;64642f5d28a845260d9c3b7464d1003f&quot;
+print &quot;Traza 101: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
+
+wiresharkpacket = &quot;b7375edcb4311b888c78b794fa828853&quot;
+print &quot;Traza 103: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
+
+wiresharkpacket = &quot;d349035cb778578f78761a9b6b2344fd&quot;
+print &quot;Traza 105: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
+
+wiresharkpacket = &quot;b7375edcb4311b888c78b794fa828853&quot;
+print &quot;Traza 107: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
+
+wiresharkpacket = &quot;e2608fd9ec82d3f082962256188ca320&quot;
+print &quot;Traza 109: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
+
+wiresharkpacket = &quot;7c961523beeabc82b97305e1facb1d41&quot;
+print &quot;Traza 112: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
+
+wiresharkpacket = &quot;62a0972768b33fbe2fb95456c36b9bf6&quot;
+print &quot;Traza 113: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
+
+wiresharkpacket = &quot;71dda074a979da25e1b51f51d8689a72&quot;
+print &quot;Traza 121: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
+
+wiresharkpacket = &quot;e8a8855bb311de5ad1d12e79a5206d89&quot;
+print &quot;Traza 123: &quot; + str(aesobj.decrypt(wiresharkpacket.decode(&quot;hex&quot;)).encode('hex'))
 </code></pre></div>
             </div>
         </div>
